@@ -15,7 +15,7 @@ namespace :highcharts_rails do
     	destination = File.join(RAILS_ROOT, "/public/javascripts/", script)
     	
     	# copy to
-    	source = File.join(RAILS_ROOT + "/vendor/plugins/highchart/javascripts/", script)
+    	source = File.join(RAILS_ROOT + "/vendor/plugins/highcharts-rails/javascripts/", script)
     	
     	# copy
     	unless FileUtils.cp_r(source, destination)
