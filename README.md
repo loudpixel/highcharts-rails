@@ -6,6 +6,16 @@ Highcharts-rails accepts a combination of hashes and arrays that formatted in a 
 
 This plugin is packaged with [Highcharts 1.1.3](http://highcharts.com/download), and [jQuery 1.3.2](http://docs.jquery.com/Release:jQuery_1.3.2).
 
+## Installation
+
+Get the plugin:
+
+	script/plugin install git://github.com/loudpixel/highcharts-rails.git
+	
+Run the rake setup:
+
+	rake highcharts_rails:install
+
 ## Usage
 
 Include the following in the head of your application layout:
