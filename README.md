@@ -49,7 +49,7 @@ We can collect all of our data, and format everything we need to in our controll
 	pie_label_formatter = '
 	  function() {
 	    if (this.y > 15) return this.point.name;
-	  }'
+	  }
 
 	# format the tooltips
 	pie_tooltip_formatter = '
@@ -95,7 +95,7 @@ We can collect all of our data, and format everything we need to in our controll
 			},
 		})
 
-In your views you can use a content block to provide the above your javascript and markup for the chart
+In your views you can use a content block to provide the above your javascript and markup for the chart. This will generate a string of javascript that will produce the Highcharts graph and insert into the div:
 
 	<!-- container to hold the pie chart -->
 	<div id="pie-chart-container" class="chart-container"></div>
@@ -103,5 +103,3 @@ In your views you can use a content block to provide the above your javascript a
 	<% content_for :javascripts do %>
 		<%= @pie_chart %>
 	<% end %>
-
-The above will generate a string of javascript that will produce the Highcharts graph and insert into the div.
