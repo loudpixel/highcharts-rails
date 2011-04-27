@@ -1,3 +1,4 @@
+
 class Hash
   
   # extend the Hash class to allow for recursive merging

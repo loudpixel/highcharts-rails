@@ -6,11 +6,13 @@ Highcharts-rails accepts a combination of hashes and arrays that formatted in a 
 
 This plugin is packaged with [Highcharts 1.1.3](http://highcharts.com/download), and [jQuery 1.3.2](http://docs.jquery.com/Release:jQuery_1.3.2).
 
+This is a FORK of https://github.com/loudpixel/highcharts-rails. I have amplified it with some controller and helper methods.
+
 ## Installation
 
 Get the plugin:
 
-	script/plugin install git://github.com/loudpixel/highcharts-rails.git
+	script/plugin install git://github.com/rpperez/highcharts-rails.git
 	
 Run the rake setup:
 
@@ -20,18 +22,13 @@ Run the rake setup:
 
 Include the following in the head of your application layout:
 
-	<%= javascript_include_tag 'jquery-1.3.2.min', 'highcharts' %>
-	<!--[if IE]>
-		<%= javascript_include_tag 'excanvas.compiled' %>
-	<![endif]-->
+	<%= highchart_includes(true) %>
+	
+You can use a boolean parameter to set fullscreen function. The fullscreen function uses a lightbox javascript make for (http://defunkt.io/facebox/).
 
-Some people like to put their javascript at the bottom of the page, regardless of your preference you should include the following to write your javascript, unless you feel it necessary to include your javascript in each view.
+This includes don't put jquery.js in your view. You need to put incorporate it for yourself.  
 
-	<script type="text/javascript">
-		$(document).ready(function() {
-			<%= yield :javascript %>
-		});
-	</script>
+<%= javascript_include_tag "http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js" %>
 
 We can collect all of our data, and format everything we need to in our controller:
 
@@ -68,7 +65,7 @@ We can collect all of our data, and format everything we need to in our controll
 	  }'
   
 	@pie_chart = 
-		Highchart.pie({
+		Highchart::Chart.pie({
 	    :chart => {
 			  :renderTo => "pie-chart-container",
 			  :margin => [50, 30, 0, 30]
@@ -104,12 +101,20 @@ We can collect all of our data, and format everything we need to in our controll
 			  :formatter => pie_tooltip_formatter
 			},
 		})
+		
+	# Create the div's and javascript text in the same controller
+	@output = highchart_object(300, 200, @pie_chart)
 
-In your views you can use a content block to provide the above your javascript and markup for the chart. This will generate a string of javascript that will produce the Highcharts graph and insert into the div:
+The hightchart_object method returns an array of three elements. The first element is an id that identified the div for your view. The second element is all the code that contains div and javascript text to make your chart. Finally, the third element is the chart. This is useful, if you want put the fullscreen link.
 
-	<!-- container to hold the pie chart -->
-	<div id="pie-chart-container" class="chart-container"></div>
- 
-	<% content_for :javascript do %>
-		<%= @pie_chart %>
-	<% end %>
+In your views you can use the output variable created in your controller:
+
+	<%= @output[1] %>
+	
+If you want to put an link to fullscreen for the chart, you can do it with:
+
+	<%= highchart_fullscreen(@output[2], {:width => "90%", :height => "90%"}) %>
+
+
+Thanks to loudpixel for your contribution.
+	
