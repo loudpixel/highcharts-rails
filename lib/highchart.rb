@@ -187,7 +187,7 @@ class Highchart
 
     "var chart = new Highcharts.Chart({ 
       #{query_params.join(",\n")} 
-    });"
+    });".html_safe
   end
 
   private
