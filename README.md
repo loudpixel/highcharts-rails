@@ -6,6 +6,8 @@ Highcharts-rails accepts a combination of hashes and arrays that formatted in a 
 
 This plugin is packaged with [Highcharts 1.1.3](http://highcharts.com/download), and [jQuery 1.3.2](http://docs.jquery.com/Release:jQuery_1.3.2).
 
+This is a fork of https://github.com/loudpixel/highcharts-rails intended to fix a bug formatting tooltips in Rails 3.
+
 ## Installation
 
 Get the plugin:
